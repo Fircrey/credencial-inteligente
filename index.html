@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+body{margin:0;background:#0B1E2B;color:#E8EEF2;font-family:'Sora',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#22C3D6;text-decoration:none}a:hover{color:#7FE3EE}
+button{font-family:inherit}
+@keyframes ci-wave{0%{transform:scale(.55);opacity:.75}100%{transform:scale(2.4);opacity:0}}
+@keyframes ci-in{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:none}}
+@keyframes ci-fade{0%{opacity:0}100%{opacity:1}}
+@keyframes ci-pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+@keyframes ci-shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-4px)}30%{transform:translateX(4px)}45%{transform:translateX(-3px)}60%{transform:translateX(3px)}75%{transform:translateX(-1px)}}
+@keyframes ci-eq{0%,100%{transform:scaleY(.22)}50%{transform:scaleY(1)}}
+@keyframes ci-dash{to{stroke-dashoffset:-24}}
+@keyframes ci-blink{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes ci-spin{to{transform:rotate(360deg)}}
+@keyframes ci-sway{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(.8deg)}}
+@keyframes ci-dot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+@keyframes ci-sheet{0%{transform:translateY(100%)}100%{transform:none}}
+@keyframes ci-glow{0%{box-shadow:0 0 0 0 rgba(34,195,214,.0)}30%{box-shadow:0 0 0 6px rgba(34,195,214,.35),0 0 60px 10px rgba(34,195,214,.45)}100%{box-shadow:0 0 0 0 rgba(34,195,214,0),0 20px 40px rgba(0,0,0,.4)}}
+@keyframes ci-flash{0%{opacity:0;transform:translateY(6px)}20%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-6px)}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:radial-gradient(1200px 600px at 50% -10%, rgba(34,195,214,.09), transparent 60%), radial-gradient(900px 500px at 50% 110%, rgba(217,180,106,.05), transparent 60%), #0B1E2B;padding:18px 26px 22px;display:flex;flex-direction:column;gap:14px">
+
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="width:44px;height:44px;border-radius:13px;background:linear-gradient(145deg,#123B4D,#0B1E2B);border:1px solid rgba(34,195,214,.45);display:grid;place-items:center;box-shadow:0 0 24px rgba(34,195,214,.22), inset 0 1px 0 rgba(255,255,255,.08);position:relative">
+        <i class="fa-brands fa-nfc-symbol" style="color:#22C3D6;font-size:20px"></i>
+        <span style="position:absolute;right:-3px;bottom:-3px;width:12px;height:12px;border-radius:4px;background:#D9B46A;border:2px solid #0B1E2B"></span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <div style="display:flex;align-items:baseline;gap:10px;font-size:19px;font-weight:600;letter-spacing:-.01em">Credencial Inteligente<span style="color:#22C3D6;font-weight:300">|</span><span style="font-weight:400;color:#B9C8D2;font-size:15px;letter-spacing:.14em">LA CANDELARIA</span></div>
+        <div style="font-size:12.5px;color:#8FA6B5">Turismo sostenible y comercio justo en La Candelaria</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;background:rgba(162,25,66,.16);border:1px solid rgba(214,80,120,.4)">
+        <span style="background:#A21942;color:#fff;font:600 11px 'Geist Mono',monospace;padding:4px 7px;border-radius:999px">ODS 8</span>
+        <span style="font-size:12px;color:#F1C9D5">Trabajo decente y crecimiento económico</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(43,212,154,.08);border:1px solid rgba(43,212,154,.3);font-size:12px;color:#A9EBD2">
+        <span style="width:8px;height:8px;border-radius:50%;background:#2BD49A;box-shadow:0 0 10px #2BD49A;animation:ci-blink 2s ease-in-out infinite"></span>Sistema conectado
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px dashed rgba(34,195,214,.45);font-size:12px;color:#9BE3EC">
+        <i class="fa-solid fa-flask" style="font-size:11px"></i>Modo demostración
+      </div>
+      <button onClick="{{ reset }}" style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(232,238,242,.18);color:#E8EEF2;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:all .2s" style-hover="background:rgba(34,195,214,.12);border-color:rgba(34,195,214,.6)">
+        <i class="fa-solid fa-rotate-left"></i>REINICIAR DEMOSTRACIÓN
+      </button>
+    </div>
+  </header>
+
+  <div style="display:grid;grid-template-columns:repeat(4,minmax(150px,1fr)) minmax(240px,1.5fr);gap:10px">
+    <div style="position:relative;padding:10px 14px;border-radius:14px;background:rgba(16,43,58,.6);border:1px solid rgba(34,195,214,.12);display:flex;align-items:center;gap:12px">
+      <div style="width:34px;height:34px;border-radius:10px;background:rgba(43,212,154,.12);display:grid;place-items:center;color:#2BD49A"><i class="fa-solid fa-receipt"></i></div>
+      <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+        <span style="font-size:11px;color:#8FA6B5;letter-spacing:.04em">Ventas transparentes hoy</span>
+        <div style="display:flex;align-items:baseline;gap:8px"><span style="font:600 22px 'Geist Mono',monospace;color:#E8EEF2">{{ sales }}</span><sc-if value="{{ salesFlash }}" hint-placeholder-val="{{ false }}"><span style="font:600 11px 'Geist Mono',monospace;color:#2BD49A;animation:ci-flash 1.6s ease forwards">+1</span></sc-if></div>
+      </div>
+    </div>
+    <div style="padding:10px 14px;border-radius:14px;background:rgba(16,43,58,.6);border:1px solid {{ nfcTileBorder }};display:flex;align-items:center;gap:12px;transition:border-color .4s">
+      <div style="width:34px;height:34px;border-radius:10px;background:rgba(34,195,214,.12);display:grid;place-items:center;color:#22C3D6"><i class="fa-brands fa-nfc-symbol"></i></div>
+      <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+        <span style="font-size:11px;color:#8FA6B5;letter-spacing:.04em">Tiempo de lectura NFC</span>
+        <div style="display:flex;align-items:baseline;gap:8px"><span style="font:600 22px 'Geist Mono',monospace">0.4 s</span><span style="font-size:10.5px;color:{{ nfcStatusColor }};white-space:nowrap">{{ nfcStatus }}</span></div>
+      </div>
+    </div>
+    <div style="padding:10px 14px;border-radius:14px;background:rgba(16,43,58,.6);border:1px solid rgba(34,195,214,.12);display:flex;align-items:center;gap:12px">
+      <div style="width:34px;height:34px;border-radius:10px;background:rgba(34,195,214,.12);display:grid;place-items:center;color:#22C3D6"><i class="fa-solid fa-language"></i></div>
+      <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+        <span style="font-size:11px;color:#8FA6B5;letter-spacing:.04em">Idiomas disponibles</span>
+        <div style="display:flex;align-items:baseline;gap:8px"><span style="font:600 22px 'Geist Mono',monospace">4</span><span style="font-size:10.5px;color:#9BE3EC">Activo: {{ langName }}</span></div>
+      </div>
+    </div>
+    <div style="padding:10px 14px;border-radius:14px;background:rgba(16,43,58,.6);border:1px solid rgba(217,180,106,.18);display:flex;align-items:center;gap:12px">
+      <div style="width:34px;height:34px;border-radius:10px;background:rgba(217,180,106,.13);display:grid;place-items:center;color:#D9B46A"><i class="fa-solid fa-id-badge"></i></div>
+      <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+        <span style="font-size:11px;color:#8FA6B5;letter-spacing:.04em">Vendedores acreditados</span>
+        <div style="display:flex;align-items:baseline;gap:8px"><span style="font:600 22px 'Geist Mono',monospace">128</span><span style="font-size:10.5px;color:#E3C88E;white-space:nowrap"><i class="fa-solid fa-star" style="font-size:9px"></i> {{ ratingAvg }} · {{ ratingCount }}</span></div>
+      </div>
+    </div>
+    <div style="padding:8px 14px;border-radius:14px;background:rgba(8,22,32,.7);border:1px solid rgba(34,195,214,.12);display:flex;flex-direction:column;justify-content:center;gap:3px;overflow:hidden">
+      <span style="font:500 10px 'Geist Mono',monospace;color:#22C3D6;letter-spacing:.12em">ACTIVIDAD DEL ECOSISTEMA</span>
+      <sc-for list="{{ logView }}" as="ev" hint-placeholder-count="2">
+        <div style="display:flex;gap:8px;font:400 11px 'Geist Mono',monospace;color:{{ ev.color }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;animation:ci-fade .4s ease"><span style="color:#5E7888">{{ ev.t }}</span><span style="overflow:hidden;text-overflow:ellipsis">{{ ev.m }}</span></div>
+      </sc-for>
+    </div>
+  </div>
+
+  <main style="flex:1;display:flex;gap:0;align-items:stretch;justify-content:center;flex-wrap:wrap;row-gap:20px">
+
+    <section data-screen-label="Credencial" style="flex:1 1 320px;max-width:440px;display:flex;flex-direction:column;gap:12px;padding:14px 18px 16px;border-radius:22px;background:linear-gradient(180deg,rgba(16,43,58,.72),rgba(16,43,58,.38));border:1px solid rgba(34,195,214,.13);box-shadow:0 30px 60px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04)">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px"><span style="font:600 11px 'Geist Mono',monospace;color:#0B1E2B;background:#22C3D6;padding:3px 7px;border-radius:6px">01</span><span style="font-size:12px;font-weight:600;letter-spacing:.12em">CREDENCIAL DEL VENDEDOR</span></div>
+        <span style="font-size:11px;color:#8FA6B5">NFC + QR</span>
+      </div>
+
+      <div style="position:relative;display:flex;flex-direction:column;align-items:center">
+        <svg width="150" height="34" viewBox="0 0 150 34" style="display:block">
+          <path d="M8 0 L62 30 L70 30 L22 0 Z" fill="#14485C"></path>
+          <path d="M142 0 L88 30 L80 30 L128 0 Z" fill="#103B4C"></path>
+          <path d="M14 0 L66 29" stroke="#22C3D6" stroke-opacity=".5" stroke-width="1" stroke-dasharray="3 4"></path>
+          <path d="M136 0 L84 29" stroke="#22C3D6" stroke-opacity=".5" stroke-width="1" stroke-dasharray="3 4"></path>
+          <rect x="62" y="24" width="26" height="10" rx="3" fill="#9AA9B2"></rect>
+          <rect x="66" y="27" width="18" height="4" rx="2" fill="#5E6E78"></rect>
+        </svg>
+        <div style="width:10px;height:14px;margin-top:-2px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,#7D8B94,#C9D3D9,#7D8B94)"></div>
+
+        <div style="transform-origin:50% -20px;animation:ci-sway 6s ease-in-out infinite">
+          <div style="width:238px;border-radius:16px;background:linear-gradient(170deg,#F6F2E7 0%,#EAE3D1 100%);overflow:hidden;position:relative;animation:{{ badgeAnim }};box-shadow:0 22px 44px rgba(0,0,0,.45), 0 2px 0 rgba(255,255,255,.6) inset;filter:{{ badgeFilter }};transition:filter .5s">
+            <div style="height:66px;background:linear-gradient(135deg,#0F3546,#0B1E2B);border-bottom:2px solid #D9B46A;padding:16px 14px 0;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative">
+              <div style="position:absolute;top:7px;left:50%;transform:translateX(-50%);width:42px;height:6px;border-radius:4px;background:#061219;box-shadow:inset 0 1px 2px rgba(0,0,0,.8)"></div>
+              <span style="font:600 9px 'Geist Mono',monospace;letter-spacing:.2em;color:#D9B46A;margin-top:4px">BOGOTÁ · LA CANDELARIA</span>
+              <span style="font-size:9.5px;font-weight:600;letter-spacing:.14em;color:#E8EEF2">COMERCIO POPULAR ACREDITADO</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;padding:0 16px 12px;margin-top:-4px">
+              <div style="position:relative;margin-top:8px">
+                <div style="width:70px;height:70px;border-radius:50%;padding:3px;background:conic-gradient(#D9B46A,#F3DFA8,#B8934A,#D9B46A)">
+                  <div style="width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2B6A7E,#0F3546 70%);display:grid;place-items:center;font:600 24px 'Sora',sans-serif;color:#F6F2E7;letter-spacing:.02em">CP</div>
+                </div>
+                <span style="position:absolute;right:2px;bottom:2px;width:16px;height:16px;border-radius:50%;background:{{ shiftColor }};border:3px solid #F1ECDF;transition:background .3s"></span>
+              </div>
+              <div style="margin-top:8px;font-size:16px;font-weight:700;color:#0B1E2B;letter-spacing:-.01em">Don Carlos Pachón</div>
+              <div style="font-size:11px;color:#3E5260;font-weight:500">Maestro Chichero y Artesano</div>
+              <div style="font-size:10.5px;color:#5A6C77;display:flex;gap:5px;align-items:center;margin-top:2px"><i class="fa-solid fa-location-dot" style="color:#B8934A"></i>Chorro de Quevedo, Bogotá</div>
+              <div style="margin-top:8px;font:600 11px 'Geist Mono',monospace;letter-spacing:.12em;color:#D9B46A;background:#0B1E2B;padding:4px 10px;border-radius:6px">VENDEDOR #008</div>
+              <div style="display:flex;justify-content:center;gap:14px;margin-top:10px;width:100%">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;border:1.5px dashed #B8934A;display:grid;place-items:center;color:#8C6D2F;background:rgba(217,180,106,.12)"><i class="fa-solid fa-landmark-dome" style="font-size:13px"></i></div><span style="font-size:8.5px;font-weight:600;color:#5A4A26;text-align:center;line-height:1.1">Alcaldía<br>de Bogotá</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;border:1.5px dashed #B8934A;display:grid;place-items:center;color:#8C6D2F;background:rgba(217,180,106,.12)"><i class="fa-solid fa-store" style="font-size:13px"></i></div><span style="font-size:8.5px;font-weight:600;color:#5A4A26">IPES</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;border:1.5px dashed #B8934A;display:grid;place-items:center;color:#8C6D2F;background:rgba(217,180,106,.12)"><i class="fa-solid fa-graduation-cap" style="font-size:13px"></i></div><span style="font-size:8.5px;font-weight:600;color:#5A4A26">SENA</span></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;margin-top:10px;width:100%;padding-top:10px;border-top:1px solid rgba(11,30,43,.12)">
+                <div style="width:58px;height:58px;padding:4px;background:#fff;border-radius:6px;flex:none"><svg viewBox="0 0 21 21" width="50" height="50" shape-rendering="crispEdges"><path d="{{ qrPath }}" fill="#0B1E2B"></path></svg></div>
+                <div style="flex:1;display:flex;align-items:center;gap:8px;padding:8px;border-radius:10px;background:#0B1E2B;position:relative;overflow:hidden">
+                  <i class="fa-brands fa-nfc-symbol" style="font-size:22px;color:#22C3D6"></i>
+                  <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font:600 11px 'Geist Mono',monospace;color:#E8EEF2;letter-spacing:.1em">NFC</span><span style="font-size:9px;color:#8FA6B5">Toca para ver el menú</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="height:16px;background:linear-gradient(90deg,#C9A65A,#F3DFA8,#B8934A,#E9CF8E,#C9A65A);display:flex;align-items:center;justify-content:space-between;padding:0 12px;font:600 8px 'Geist Mono',monospace;color:#4A3A18;letter-spacing:.14em"><span>VIGENCIA 2026</span><span>ID 008-CQ</span></div>
+          </div>
+        </div>
+
+        <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;left:0;right:0;bottom:6px;margin:0 4px;padding:12px 14px;border-radius:14px;background:rgba(7,22,31,.94);border:1px solid rgba(43,212,154,.5);box-shadow:0 18px 40px rgba(0,0,0,.5);display:flex;gap:12px;align-items:flex-start;animation:ci-in .35s ease;z-index:3;backdrop-filter:blur(8px)">
+            <div style="width:30px;height:30px;border-radius:50%;background:#2BD49A;display:grid;place-items:center;color:#06261A;flex:none;animation:ci-pop .5s ease"><i class="fa-solid fa-check"></i></div>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-size:12.5px;font-weight:700;color:#BFF5DF;letter-spacing:.04em">CREDENCIAL LEÍDA CORRECTAMENTE</span>
+              <span style="font-size:11.5px;color:#B9C8D2">Datos cargados desde caché local.</span>
+              <span style="font:500 10.5px 'Geist Mono',monospace;color:#22C3D6">0 MB de datos consumidos – Modo demostración offline.</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="padding:12px 14px;border-radius:16px;background:rgba(8,22,32,.55);border:1px solid {{ shiftBorder }};display:flex;flex-direction:column;gap:9px;transition:border-color .3s">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="width:10px;height:10px;border-radius:50%;background:{{ shiftColor }};box-shadow:0 0 12px {{ shiftColor }};animation:ci-blink 1.6s infinite"></span>
+            <span style="font-size:14px;font-weight:700;letter-spacing:.08em;color:{{ shiftText }}">{{ shiftLabel }}</span>
+          </div>
+          <button role="switch" aria-checked="{{ shiftOn }}" onClick="{{ toggleShift }}" style="width:54px;height:30px;border-radius:999px;border:none;padding:3px;cursor:pointer;background:{{ switchBg }};transition:background .3s;position:relative;flex:none" title="Cambiar estado del turno">
+            <span style="display:block;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transform:translateX({{ knobX }});transition:transform .3s cubic-bezier(.4,1.4,.6,1)"></span>
+          </button>
+        </div>
+        <sc-if value="{{ shiftOn }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:11.5px;color:#B9C8D2;animation:ci-fade .3s">
+            <span style="display:flex;gap:7px;align-items:center;grid-column:1 / -1"><i class="fa-solid fa-location-dot" style="color:#22C3D6;width:12px"></i>Plazoleta Chorro de Quevedo</span>
+            <span style="display:flex;gap:7px;align-items:center"><i class="fa-solid fa-table-cells-large" style="color:#22C3D6;width:12px"></i>Puesto #08</span>
+            <span style="display:flex;gap:7px;align-items:center"><i class="fa-regular fa-clock" style="color:#22C3D6;width:12px"></i>10:00 AM – 4:00 PM</span>
+            <span style="grid-column:1 / -1;justify-self:start;display:flex;gap:6px;align-items:center;font-size:11px;font-weight:600;color:#A9EBD2;background:rgba(43,212,154,.1);border:1px solid rgba(43,212,154,.35);padding:4px 9px;border-radius:999px"><i class="fa-solid fa-shield-halved"></i>Vendedor autorizado</span>
+          </div>
+        </sc-if>
+        <sc-if value="{{ shiftOff }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:11.5px;animation:ci-fade .3s">
+            <span style="display:flex;gap:8px;align-items:center;color:#FFC2C8"><i class="fa-solid fa-ban" style="color:#FF5A6A"></i>Cobros deshabilitados por control de aforo.</span>
+            <span style="justify-self:start;align-self:flex-start;display:flex;gap:6px;align-items:center;font-size:11px;font-weight:600;color:#FFB3BB;background:rgba(255,90,106,.1);border:1px solid rgba(255,90,106,.35);padding:4px 9px;border-radius:999px"><i class="fa-solid fa-user-lock"></i>Vendedor no habilitado temporalmente</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <button onClick="{{ tapNFC }}" style="position:relative;display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;border:1px solid rgba(34,195,214,.6);background:linear-gradient(135deg,rgba(34,195,214,.22),rgba(34,195,214,.06));color:#E8EEF2;cursor:pointer;box-shadow:0 0 30px rgba(34,195,214,.18), inset 0 1px 0 rgba(255,255,255,.08);transition:transform .15s, box-shadow .2s;text-align:left" style-hover="box-shadow:0 0 44px rgba(34,195,214,.38), inset 0 1px 0 rgba(255,255,255,.1);transform:translateY(-1px)" style-active="transform:scale(.98)">
+        <div style="position:relative;width:42px;height:42px;flex:none;display:grid;place-items:center">
+          <span style="position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(34,195,214,.6);animation:ci-wave 2.4s ease-out infinite"></span>
+          <span style="position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(34,195,214,.6);animation:ci-wave 2.4s ease-out 1.2s infinite"></span>
+          <sc-if value="{{ nfcBurst }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;inset:-4px;border-radius:50%;border:2px solid #22C3D6;animation:ci-wave .9s ease-out forwards"></span>
+            <span style="position:absolute;inset:-4px;border-radius:50%;border:2px solid #22C3D6;animation:ci-wave .9s ease-out .2s forwards;opacity:0"></span>
+            <span style="position:absolute;inset:-4px;border-radius:50%;border:2px solid #7FE3EE;animation:ci-wave .9s ease-out .4s forwards;opacity:0"></span>
+          </sc-if>
+          <div style="width:42px;height:42px;border-radius:50%;background:#22C3D6;display:grid;place-items:center;color:#0B1E2B;font-size:19px;box-shadow:0 0 18px rgba(34,195,214,.7);position:relative"><i class="fa-brands fa-nfc-symbol"></i></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px;flex:1">
+          <span style="font-size:14px;font-weight:700;letter-spacing:.08em">{{ nfcBtnLabel }}</span>
+          <span style="display:flex;align-items:center;gap:8px;font-size:11px;color:#9BE3EC">
+            <span style="display:flex;align-items:flex-end;gap:2px;height:10px"><span style="width:3px;height:4px;background:#22C3D6;border-radius:1px"></span><span style="width:3px;height:7px;background:#22C3D6;border-radius:1px"></span><span style="width:3px;height:10px;background:#22C3D6;border-radius:1px;animation:ci-blink 1.2s infinite"></span></span>
+            Proximidad &lt; 4 cm · Lectura 0.4 s
+          </span>
+        </div>
+        <i class="fa-solid fa-mobile-screen-button" style="font-size:18px;color:#22C3D6;opacity:.8"></i>
+      </button>
+    </section>
+
+    <section data-screen-label="Smartphone" style="flex:0 0 auto;padding:0 54px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative">
+      <sc-if value="{{ showConnectors }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;left:0;top:50%;width:54px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none">
+          <svg width="54" height="10" viewBox="0 0 54 10"><line x1="0" y1="5" x2="54" y2="5" stroke="{{ connLeftColor }}" stroke-width="2" stroke-dasharray="6 6" style="animation:ci-dash 1s linear infinite"></line><circle cx="4" cy="5" r="3.5" fill="{{ connLeftColor }}"></circle><circle cx="50" cy="5" r="3.5" fill="{{ connLeftColor }}"></circle></svg>
+          <span style="font:500 9.5px 'Geist Mono',monospace;color:{{ connLeftColor }};letter-spacing:.08em;text-align:center">NFC<br>0.4 s</span>
+        </div>
+        <div style="position:absolute;right:0;top:50%;width:54px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none">
+          <svg width="54" height="10" viewBox="0 0 54 10"><line x1="0" y1="5" x2="54" y2="5" stroke="{{ connRightColor }}" stroke-width="2" stroke-dasharray="6 6" style="animation:ci-dash 1s linear infinite"></line><circle cx="4" cy="5" r="3.5" fill="{{ connRightColor }}"></circle><circle cx="50" cy="5" r="3.5" fill="{{ connRightColor }}"></circle></svg>
+          <span style="font:500 9.5px 'Geist Mono',monospace;color:{{ connRightColor }};letter-spacing:.08em;text-align:center">BT LE<br>120 ms</span>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span style="font:600 11px 'Geist Mono',monospace;color:#0B1E2B;background:#22C3D6;padding:3px 7px;border-radius:6px">02</span><span style="font-size:12px;font-weight:600;letter-spacing:.12em">EXPERIENCIA DEL TURISTA</span>
+      </div>
+
+      <div style="position:relative;width:352px;height:712px;border-radius:56px;padding:11px;background:linear-gradient(145deg,#2A3640,#0E161C 40%,#1C262E);box-shadow:0 0 0 1.5px #3B4852, 0 40px 80px rgba(0,0,0,.55), 0 0 90px rgba(34,195,214,.12), inset 0 0 0 2px #05090C">
+        <span style="position:absolute;left:-3px;top:150px;width:4px;height:30px;border-radius:2px 0 0 2px;background:#2E3B45"></span>
+        <span style="position:absolute;left:-3px;top:200px;width:4px;height:54px;border-radius:2px 0 0 2px;background:#2E3B45"></span>
+        <span style="position:absolute;left:-3px;top:266px;width:4px;height:54px;border-radius:2px 0 0 2px;background:#2E3B45"></span>
+        <span style="position:absolute;right:-3px;top:220px;width:4px;height:84px;border-radius:0 2px 2px 0;background:#2E3B45"></span>
+
+        <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#07141D;display:flex;flex-direction:column">
+          <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:110px;height:32px;border-radius:20px;background:#000;z-index:20;display:flex;align-items:center;justify-content:flex-end;padding-right:12px">
+            <span style="width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2A4A5E,#05090C)"></span>
+          </div>
+          <div style="height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 32px;font:600 14px 'Sora',sans-serif;color:#E8EEF2;z-index:5">
+            <span>10:24</span>
+            <span style="display:flex;gap:6px;font-size:12px"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-three-quarters"></i></span>
+          </div>
+
+          <sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 22px 26px;background:radial-gradient(420px 320px at 50% 30%, rgba(34,195,214,.14), transparent 70%);animation:ci-fade .4s">
+              <div style="display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);align-self:stretch">
+                <sc-for list="{{ langBtns }}" as="lb" hint-placeholder-count="4">
+                  <button onClick="{{ lb.onClick }}" style="flex:1;padding:7px 0;border-radius:9px;border:none;cursor:pointer;font:600 11.5px 'Geist Mono',monospace;background:{{ lb.bg }};color:{{ lb.color }};transition:all .2s">{{ lb.short }}</button>
+                </sc-for>
+              </div>
+              <div style="margin-top:22px;display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;color:#9BE3EC;font-weight:600"><i class="fa-brands fa-nfc-symbol"></i>{{ t.brand }}</div>
+              <svg viewBox="0 0 260 130" width="260" height="130" style="margin-top:14px" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M0 70 C40 40 70 55 100 38 C130 22 160 44 190 30 C220 18 240 34 260 28" stroke="#22C3D6" stroke-opacity=".35" stroke-width="1.5"></path>
+                <path d="M0 86 C50 66 90 78 130 64 C170 52 210 70 260 58" stroke="#22C3D6" stroke-opacity=".2" stroke-width="1.5"></path>
+                <path d="M8 126 H252" stroke="#8FA6B5" stroke-opacity=".5" stroke-width="1.5"></path>
+                <path d="M30 126 V84 H80 V126" stroke="#B9C8D2" stroke-width="1.5"></path>
+                <path d="M30 84 L55 70 L80 84" stroke="#B9C8D2" stroke-width="1.5"></path>
+                <path d="M44 126 V104 M66 126 V104 M40 96 H70" stroke="#8FA6B5" stroke-width="1.2"></path>
+                <path d="M100 126 V72 H158 V126" stroke="#E8EEF2" stroke-width="1.6"></path>
+                <path d="M96 72 L129 50 L162 72" stroke="#E8EEF2" stroke-width="1.6"></path>
+                <path d="M118 50 V30 H140 V50" stroke="#D9B46A" stroke-width="1.6"></path>
+                <path d="M124 50 V40 A5 5 0 0 1 134 40 V50" stroke="#D9B46A" stroke-width="1.4"></path>
+                <circle cx="129" cy="44" r="1.8" fill="#D9B46A" stroke="none"></circle>
+                <path d="M118 126 V100 A11 11 0 0 1 140 100 V126" stroke="#E8EEF2" stroke-width="1.6"></path>
+                <path d="M178 126 V90 H232 V126 M178 98 H232" stroke="#B9C8D2" stroke-width="1.4"></path>
+                <path d="M190 126 V108 M206 126 V108 M222 126 V108" stroke="#8FA6B5" stroke-width="1.2"></path>
+                <path d="M196 126 C196 118 210 118 210 126" stroke="#22C3D6" stroke-width="1.4"></path>
+                <path d="M203 116 V110 M199 112 C201 108 205 108 207 112" stroke="#22C3D6" stroke-width="1.2"></path>
+              </svg>
+              <div style="margin-top:18px;font-size:24px;font-weight:600;text-align:center;line-height:1.2;letter-spacing:-.01em;text-wrap:balance">{{ t.welcomeTitle }}</div>
+              <div style="margin-top:10px;font-size:14px;color:#B9C8D2;text-align:center;line-height:1.45;text-wrap:pretty">{{ t.welcomeMsg }}</div>
+              <div style="margin-top:8px;font-size:12px;color:#8FA6B5;display:flex;align-items:center;gap:6px"><i class="fa-solid fa-circle-check" style="color:#2BD49A"></i>{{ t.welcomeSub }}</div>
+              <div style="flex:1"></div>
+              <div style="position:relative;width:96px;height:96px;display:grid;place-items:center">
+                <span style="position:absolute;inset:14px;border-radius:50%;border:1.5px solid rgba(34,195,214,.55);animation:ci-wave 2.6s ease-out infinite"></span>
+                <span style="position:absolute;inset:14px;border-radius:50%;border:1.5px solid rgba(34,195,214,.55);animation:ci-wave 2.6s ease-out .9s infinite"></span>
+                <span style="position:absolute;inset:14px;border-radius:50%;border:1.5px solid rgba(34,195,214,.55);animation:ci-wave 2.6s ease-out 1.8s infinite"></span>
+                <div style="width:62px;height:62px;border-radius:50%;background:rgba(34,195,214,.14);border:1px solid rgba(34,195,214,.5);display:grid;place-items:center;font-size:26px;color:#22C3D6"><i class="fa-brands fa-nfc-symbol"></i></div>
+              </div>
+              <div style="margin-top:10px;font:500 11.5px 'Geist Mono',monospace;color:#9BE3EC;display:flex;align-items:center;gap:8px"><i class="fa-solid fa-lock" style="font-size:10px"></i>{{ lockedHint }}</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ unlocked }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:4px 16px 30px;display:flex;flex-direction:column;gap:12px;animation:ci-in .55s cubic-bezier(.2,.8,.2,1)">
+              <div style="display:flex;gap:12px;align-items:center;padding:12px;border-radius:18px;background:linear-gradient(135deg,rgba(217,180,106,.14),rgba(16,43,58,.6));border:1px solid rgba(217,180,106,.28)">
+                <div style="width:50px;height:50px;border-radius:50%;padding:2px;background:conic-gradient(#D9B46A,#F3DFA8,#B8934A,#D9B46A);flex:none"><div style="width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2B6A7E,#0F3546 70%);display:grid;place-items:center;font-weight:600;font-size:17px;color:#F6F2E7">CP</div></div>
+                <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                  <span style="font-size:14.5px;font-weight:700;letter-spacing:.06em">DON CARLOS PACHÓN</span>
+                  <span style="font-size:12px;color:#E3C88E">{{ t.role }}</span>
+                  <span style="font-size:11px;color:#A9EBD2;display:flex;gap:5px;align-items:center"><i class="fa-solid fa-circle-check"></i>{{ t.accredited }}</span>
+                </div>
+                <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex:none">
+                  <span style="font:600 15px 'Geist Mono',monospace;color:#E3C88E"><i class="fa-solid fa-star" style="font-size:11px"></i> {{ ratingAvg }}</span>
+                  <span style="font-size:9.5px;color:#8FA6B5">{{ ratingCount }} {{ t.ratings }}</span>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)">
+                <sc-for list="{{ langBtns }}" as="lb" hint-placeholder-count="4">
+                  <button onClick="{{ lb.onClick }}" style="flex:1;padding:6px 0 5px;border-radius:9px;border:none;cursor:pointer;background:{{ lb.bg }};color:{{ lb.color }};display:flex;flex-direction:column;align-items:center;gap:1px;transition:all .2s"><span style="font:600 11.5px 'Geist Mono',monospace">{{ lb.short }}</span><span style="font-size:9.5px;opacity:.85">{{ lb.name }}</span></button>
+                </sc-for>
+              </div>
+
+              <sc-if value="{{ shiftOn }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,rgba(43,212,154,.2),rgba(43,212,154,.06));border:1px solid rgba(43,212,154,.5);box-shadow:0 0 28px rgba(43,212,154,.15);animation:{{ hapticAnim }}">
+                  <div style="width:38px;height:38px;border-radius:12px;background:#2BD49A;display:grid;place-items:center;color:#05281B;font-size:17px;flex:none;box-shadow:0 0 16px rgba(43,212,154,.6)"><i class="fa-solid fa-shield-halved"></i></div>
+                  <div style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:700;letter-spacing:.06em;color:#BFF5DF">{{ t.fairTitle }}</span>
+                    <span style="font-size:11px;color:#CFE9DE;line-height:1.35">{{ t.fairSub }}</span>
+                    <span style="font-size:9.5px;color:#7FBFA6;font-style:italic">{{ t.fairNote }}</span>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ shiftOff }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,rgba(255,90,106,.22),rgba(255,90,106,.07));border:1px solid rgba(255,90,106,.6);animation:ci-shake .5s ease">
+                  <div style="width:38px;height:38px;border-radius:12px;background:#FF5A6A;display:grid;place-items:center;color:#2A0509;font-size:17px;flex:none"><i class="fa-solid fa-ban"></i></div>
+                  <div style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:700;letter-spacing:.06em;color:#FFD0D5">{{ t.offTitle }}</span>
+                    <span style="font-size:11px;color:#F3C3C8;line-height:1.35">{{ t.offSub }}</span>
+                  </div>
+                </div>
+              </sc-if>
+
+              <div style="display:flex;align-items:baseline;justify-content:space-between;padding:2px 2px 0">
+                <span style="font-size:15px;font-weight:600">{{ t.menu }}</span>
+                <span style="font:500 10.5px 'Geist Mono',monospace;color:#8FA6B5">{{ curCode }}</span>
+              </div>
+
+              <sc-for list="{{ prodView }}" as="p" hint-placeholder-count="3">
+                <div style="display:flex;gap:12px;padding:12px;border-radius:18px;background:rgba(16,43,58,.7);border:1px solid rgba(255,255,255,.07);opacity:{{ p.opacity }};transition:opacity .3s;animation:ci-in .5s ease both;animation-delay:{{ p.delay }}">
+                  <div style="width:64px;height:64px;border-radius:16px;flex:none;display:grid;place-items:center;background:{{ p.tileBg }};border:1px solid rgba(255,255,255,.08)">
+                    <sc-if value="{{ p.isChicha }}" hint-placeholder-val="{{ false }}">
+                      <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M13 14 H35 L32 41 H16 Z" stroke="#F3DFA8" stroke-width="2"></path><path d="M14.5 22 H33.5 L31.4 39.5 H16.6 Z" fill="#D9B46A" fill-opacity=".55" stroke="none"></path><path d="M16 22 C20 20 24 24 28 22 C30 21 32 21 33.5 22" stroke="#F3DFA8" stroke-width="1.5"></path><circle cx="21" cy="30" r="1.4" fill="#FFF3D0" stroke="none"></circle><circle cx="26" cy="34" r="1.2" fill="#FFF3D0" stroke="none"></circle><circle cx="28" cy="27" r="1" fill="#FFF3D0" stroke="none"></circle><path d="M30 14 L36 5" stroke="#22C3D6" stroke-width="2"></path></svg>
+                    </sc-if>
+                    <sc-if value="{{ p.isManilla }}" hint-placeholder-val="{{ false }}">
+                      <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="24" rx="17" ry="11" stroke="#E36A5A" stroke-width="5"></ellipse><ellipse cx="24" cy="24" rx="17" ry="11" stroke="#F3DFA8" stroke-width="1.6" stroke-dasharray="3 3"></ellipse><path d="M9 20 L12 24 L9 28 M39 20 L36 24 L39 28" stroke="#22C3D6" stroke-width="1.6"></path><circle cx="24" cy="35" r="2.6" fill="#D9B46A" stroke="none"></circle></svg>
+                    </sc-if>
+                    <sc-if value="{{ p.isRelato }}" hint-placeholder-val="{{ false }}">
+                      <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 10 H34 A4 4 0 0 1 38 14 V36 A4 4 0 0 1 34 40 H16" stroke="#F3DFA8" stroke-width="2"></path><path d="M14 10 A4 4 0 0 0 10 14 A4 4 0 0 0 14 18 H18 V36 A4 4 0 0 1 14 40 A4 4 0 0 1 10 36 A4 4 0 0 1 14 32" stroke="#F3DFA8" stroke-width="2"></path><path d="M23 18 H33 M23 23 H33 M23 28 H30" stroke="#22C3D6" stroke-width="1.8"></path></svg>
+                    </sc-if>
+                  </div>
+                  <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+                    <span style="font-size:13.5px;font-weight:600;line-height:1.25">{{ p.name }}</span>
+                    <span style="font-size:11px;color:#9FB3C0;line-height:1.35">{{ p.desc }}</span>
+                    <span style="font-size:10.5px;color:#7F97A6;display:flex;gap:5px;align-items:center"><i class="{{ p.presIcon }}" style="font-size:9px"></i>{{ p.pres }}</span>
+                    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-top:6px">
+                      <div style="display:flex;flex-direction:column;line-height:1.15">
+                        <span style="font:600 17px 'Geist Mono',monospace;color:#E8EEF2">{{ p.primary }}</span>
+                        <span style="font-size:10px;color:#8FA6B5">{{ p.secondary }}</span>
+                      </div>
+                      <button disabled="{{ p.disabled }}" onClick="{{ p.onSelect }}" style="padding:8px 12px;border-radius:10px;border:none;font-size:11.5px;font-weight:600;cursor:{{ p.cursor }};background:{{ p.btnBg }};color:{{ p.btnColor }};transition:all .2s;white-space:nowrap">{{ p.btnLabel }}</button>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+
+              <div style="display:flex;gap:8px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.03);border:1px dashed rgba(143,166,181,.25);font-size:10.5px;color:#8FA6B5;line-height:1.45">
+                <i class="fa-solid fa-circle-info" style="margin-top:2px;color:#22C3D6"></i><span>{{ rateNote }}</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;z-index:15;background:rgba(3,10,15,.62);backdrop-filter:blur(3px);display:flex;flex-direction:column;justify-content:flex-end;animation:ci-fade .25s">
+              <div style="background:linear-gradient(180deg,#123446,#0C2230);border-top:1px solid rgba(34,195,214,.35);border-radius:28px 28px 0 0;padding:12px 20px 30px;display:flex;flex-direction:column;gap:14px;animation:ci-sheet .4s cubic-bezier(.2,.8,.2,1);box-shadow:0 -20px 50px rgba(0,0,0,.5)">
+                <div style="align-self:center;width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.2)"></div>
+
+                <sc-if value="{{ stepConfirm }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:14px;animation:ci-fade .3s">
+                    <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:17px;font-weight:600">{{ t.modalTitle }}</span><button onClick="{{ closeModal }}" style="width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.08);color:#E8EEF2;cursor:pointer" title="{{ t.cancel }}"><i class="fa-solid fa-xmark"></i></button></div>
+                    <div style="display:flex;flex-direction:column;gap:9px;padding:14px;border-radius:16px;background:rgba(8,22,32,.6);border:1px solid rgba(255,255,255,.07);font-size:12.5px">
+                      <div style="display:flex;justify-content:space-between;gap:10px"><span style="color:#8FA6B5">{{ t.productLbl }}</span><span style="font-weight:600;text-align:right">{{ modalProd.name }}</span></div>
+                      <div style="display:flex;justify-content:space-between;gap:10px"><span style="color:#8FA6B5">{{ t.priceLbl }}</span><span style="font:600 13px 'Geist Mono',monospace">{{ modalProd.cop }}</span></div>
+                      <sc-if value="{{ showConv }}" hint-placeholder-val="{{ false }}"><div style="display:flex;justify-content:space-between;gap:10px"><span style="color:#8FA6B5">{{ t.refLbl }}</span><span style="font:500 12px 'Geist Mono',monospace;color:#9BE3EC">{{ modalProd.conv }}</span></div></sc-if>
+                      <div style="display:flex;justify-content:space-between;gap:10px"><span style="color:#8FA6B5">{{ t.methodLbl }}</span><span>{{ t.methodVal }}</span></div>
+                      <div style="height:1px;background:rgba(255,255,255,.08)"></div>
+                      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-weight:600">{{ t.totalLbl }}</span><span style="font:600 20px 'Geist Mono',monospace;color:#2BD49A">{{ modalProd.primary }}</span></div>
+                    </div>
+                    <span style="font-size:11px;color:#8FA6B5;display:flex;gap:7px;align-items:center"><i class="fa-solid fa-flask" style="color:#22C3D6"></i>{{ t.simNote }}</span>
+                    <sc-if value="{{ shiftOff }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:#FFC2C8;display:flex;gap:7px;align-items:center;padding:8px 10px;border-radius:10px;background:rgba(255,90,106,.12);border:1px solid rgba(255,90,106,.4)"><i class="fa-solid fa-ban"></i>{{ t.blocked }}</span></sc-if>
+                    <button disabled="{{ shiftOff }}" onClick="{{ confirmPay }}" style="padding:15px;border-radius:14px;border:none;font-size:14px;font-weight:700;letter-spacing:.08em;cursor:{{ payCursor }};background:{{ payBg }};color:{{ payColor }};box-shadow:{{ payShadow }};transition:all .2s">{{ t.confirm }}</button>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ stepProcessing }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:28px 0 18px;animation:ci-fade .3s">
+                    <div style="width:56px;height:56px;border-radius:50%;border:3px solid rgba(34,195,214,.2);border-top-color:#22C3D6;animation:ci-spin .8s linear infinite"></div>
+                    <span style="font-size:14px;color:#B9C8D2">{{ t.processing }}</span>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ stepSuccess }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 0 0;text-align:center;animation:ci-fade .3s">
+                    <div style="width:68px;height:68px;border-radius:50%;background:#2BD49A;display:grid;place-items:center;color:#05281B;font-size:30px;animation:ci-pop .55s ease;box-shadow:0 0 40px rgba(43,212,154,.5)"><i class="fa-solid fa-check"></i></div>
+                    <span style="font-size:17px;font-weight:600;margin-top:4px">{{ t.successTitle }}</span>
+                    <span style="font-size:12.5px;color:#B9C8D2">{{ t.successSub }}</span>
+                    <div style="display:flex;flex-direction:column;gap:6px;width:100%;padding:12px 14px;border-radius:14px;background:rgba(8,22,32,.6);border:1px dashed rgba(43,212,154,.35);font-size:12px;margin-top:4px">
+                      <div style="display:flex;justify-content:space-between"><span style="color:#8FA6B5">{{ modalProd.name }}</span><span style="font-family:'Geist Mono',monospace">{{ modalProd.cop }}</span></div>
+                      <div style="display:flex;justify-content:space-between"><span style="color:#8FA6B5">{{ t.receiptLbl }}</span><span style="font-family:'Geist Mono',monospace;color:#9BE3EC">{{ txId }}</span></div>
+                    </div>
+                    <button onClick="{{ goRate }}" style="margin-top:6px;width:100%;padding:14px;border-radius:14px;border:none;font-size:13.5px;font-weight:600;cursor:pointer;background:#22C3D6;color:#0B1E2B">{{ t.rateBtn }}</button>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ stepRate }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:6px 0 0;text-align:center;animation:ci-in .35s">
+                    <span style="font-size:18px;font-weight:600">{{ t.rateTitle }}</span>
+                    <span style="font-size:12.5px;color:#B9C8D2">{{ t.rateSub }}</span>
+                    <div style="display:flex;gap:8px;margin-top:4px">
+                      <sc-for list="{{ starList }}" as="s" hint-placeholder-count="5">
+                        <button onClick="{{ s.onClick }}" style="width:44px;height:44px;border:none;background:transparent;cursor:pointer;font-size:28px;color:{{ s.color }};transform:scale({{ s.scale }});transition:transform .2s, color .2s" title="{{ s.title }}"><i class="{{ s.cls }}"></i></button>
+                      </sc-for>
+                    </div>
+                    <span style="font-size:12px;color:#E3C88E;min-height:16px">{{ rateHint }}</span>
+                    <button disabled="{{ cantSend }}" onClick="{{ sendRating }}" style="width:100%;padding:14px;border-radius:14px;border:none;font-size:13.5px;font-weight:600;cursor:pointer;background:{{ sendBg }};color:{{ sendColor }};transition:all .2s">{{ t.send }}</button>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ stepThanks }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 0 0;text-align:center;animation:ci-fade .3s">
+                    <div style="position:relative;width:76px;height:76px;display:grid;place-items:center">
+                      <span style="position:absolute;inset:0;border-radius:50%;border:2px solid #D9B46A;animation:ci-wave 1.2s ease-out forwards"></span>
+                      <span style="position:absolute;inset:0;border-radius:50%;border:2px solid #2BD49A;animation:ci-wave 1.2s ease-out .3s forwards;opacity:0"></span>
+                      <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#F3DFA8,#D9B46A);display:grid;place-items:center;color:#3A2A08;font-size:26px;animation:ci-pop .55s ease"><i class="fa-solid fa-heart"></i></div>
+                    </div>
+                    <span style="font-size:18px;font-weight:600">{{ t.thanksTitle }}</span>
+                    <span style="font-size:12.5px;color:#B9C8D2;line-height:1.45;text-wrap:pretty">{{ t.thanksSub }}</span>
+                    <span style="font:500 12px 'Geist Mono',monospace;color:#E3C88E"><i class="fa-solid fa-star" style="font-size:10px"></i> {{ ratingAvg }} · {{ ratingCount }} {{ t.ratings }}</span>
+                    <button onClick="{{ closeModal }}" style="margin-top:6px;width:100%;padding:14px;border-radius:14px;border:1px solid rgba(34,195,214,.5);font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;color:#E8EEF2">{{ t.back }}</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+
+          <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:5px;border-radius:3px;background:rgba(232,238,242,.55);z-index:25"></div>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Auricular IA" style="flex:1 1 340px;max-width:460px;display:flex;flex-direction:column;gap:12px;padding:14px 18px 16px;border-radius:22px;background:linear-gradient(180deg,rgba(16,43,58,.72),rgba(16,43,58,.38));border:1px solid rgba(34,195,214,.13);box-shadow:0 30px 60px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04);min-height:0">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px"><span style="font:600 11px 'Geist Mono',monospace;color:#0B1E2B;background:#22C3D6;padding:3px 7px;border-radius:6px">03</span><span style="font-size:12px;font-weight:600;letter-spacing:.12em">AURICULAR INTELIGENTE</span></div>
+        <button onClick="{{ toggleVoice }}" disabled="{{ noSpeech }}" style="display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid {{ voiceBorder }};background:{{ voiceBg }};color:{{ voiceColor }};transition:all .2s"><i class="{{ voiceIcon }}"></i>{{ voiceLabel }}</button>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:center;padding:14px;border-radius:18px;background:rgba(8,22,32,.55);border:1px solid rgba(34,195,214,.14)">
+        <div style="position:relative;width:96px;height:96px;flex:none;display:grid;place-items:center">
+          <sc-if value="{{ running }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;inset:8px;border-radius:50%;border:1.5px solid rgba(34,195,214,.6);animation:ci-wave 1.8s ease-out infinite"></span>
+            <span style="position:absolute;inset:8px;border-radius:50%;border:1.5px solid rgba(34,195,214,.6);animation:ci-wave 1.8s ease-out .9s infinite"></span>
+          </sc-if>
+          <svg viewBox="0 0 96 96" width="92" height="92" style="position:relative">
+            <defs>
+              <linearGradient id="ci-bud" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A4A55"></stop><stop offset="1" stop-color="#121C23"></stop></linearGradient>
+              <radialGradient id="ci-tip" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#5C6C77"></stop><stop offset="1" stop-color="#1E2A32"></stop></radialGradient>
+            </defs>
+            <rect x="50" y="44" width="16" height="44" rx="8" transform="rotate(-14 58 66)" fill="url(#ci-bud)" stroke="#4A5B66" stroke-width="1"></rect>
+            <ellipse cx="44" cy="36" rx="26" ry="24" fill="url(#ci-bud)" stroke="#4A5B66" stroke-width="1"></ellipse>
+            <ellipse cx="32" cy="30" rx="11" ry="10" fill="url(#ci-tip)"></ellipse>
+            <path d="M52 22 A16 16 0 0 1 62 40" stroke="#22C3D6" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".8"></path>
+            <circle cx="56" cy="44" r="3" fill="{{ ledColor }}"></circle>
+            <circle cx="64" cy="84" r="1.6" fill="#0B1E2B"></circle>
+          </svg>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px;min-width:0">
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span style="display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:#A9EBD2;background:rgba(43,212,154,.1);border:1px solid rgba(43,212,154,.3);padding:3px 8px;border-radius:999px"><span style="width:6px;height:6px;border-radius:50%;background:#2BD49A"></span>Conectado</span>
+            <span style="display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:#9BE3EC;background:rgba(34,195,214,.1);border:1px solid rgba(34,195,214,.35);padding:3px 8px;border-radius:999px"><i class="fa-solid fa-microchip" style="font-size:9px"></i>IA conectada · demo</span>
+            <span style="font:500 10.5px 'Geist Mono',monospace;color:#E3C88E;background:rgba(217,180,106,.1);border:1px solid rgba(217,180,106,.3);padding:3px 8px;border-radius:999px">120 ms</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font:600 16px 'Geist Mono',monospace;letter-spacing:.06em">{{ pairLabel }}</span>
+            <span style="font-size:11px;color:{{ transColor }}">{{ transStatus }}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:3px;height:26px">
+            <sc-for list="{{ eqBars }}" as="b" hint-placeholder-count="22">
+              <span style="flex:1;height:100%;border-radius:2px;background:linear-gradient(180deg,#22C3D6,rgba(34,195,214,.25));transform-origin:50% 50%;transform:scaleY(.22);animation:ci-eq {{ b.dur }} ease-in-out {{ b.delay }} infinite;animation-play-state:{{ eqState }}"></span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+        <sc-for list="{{ scenBtns }}" as="sb" hint-placeholder-count="3">
+          <button onClick="{{ sb.onClick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:10px 11px;border-radius:14px;cursor:pointer;text-align:left;border:1px solid {{ sb.border }};background:{{ sb.bg }};color:#E8EEF2;transition:all .2s" style-hover="border-color:rgba(34,195,214,.6)">
+            <span style="display:flex;align-items:center;justify-content:space-between;width:100%"><i class="{{ sb.icon }}" style="color:{{ sb.iconColor }};font-size:14px"></i><span style="font:500 9.5px 'Geist Mono',monospace;color:#5E7888">{{ sb.num }}</span></span>
+            <span style="font-size:11.5px;font-weight:600;line-height:1.25">{{ sb.title }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div ref="{{ chatRef }}" style="flex:1;min-height:220px;max-height:420px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(34,195,214,.3) transparent;padding:12px;border-radius:18px;background:rgba(5,15,22,.55);border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:10px">
+        <sc-if value="{{ chatEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#8FA6B5;text-align:center;padding:20px">
+            <i class="fa-solid fa-comments" style="font-size:24px;color:rgba(34,195,214,.5)"></i>
+            <span style="font-size:12.5px;line-height:1.5;max-width:240px">Selecciona un escenario para iniciar la traducción simulada entre el turista y Don Carlos.</span>
+          </div>
+        </sc-if>
+        <sc-for list="{{ chatMsgs }}" as="m" hint-placeholder-count="0">
+          <div style="display:flex;flex-direction:column;gap:5px;max-width:90%;align-self:{{ m.align }};animation:ci-in .35s ease">
+            <div style="display:flex;align-items:center;gap:6px;font:600 9.5px 'Geist Mono',monospace;letter-spacing:.08em;color:{{ m.labelColor }};justify-content:{{ m.justify }}">
+              <i class="{{ m.icon }}" style="font-size:10px"></i>{{ m.label }}
+              <span style="padding:1px 5px;border-radius:4px;border:1px solid {{ m.labelColor }};font-size:9px">{{ m.code }}</span>
+              <sc-if value="{{ m.isTrans }}" hint-placeholder-val="{{ false }}"><span style="color:#E3C88E;font-weight:500">· 120 ms</span></sc-if>
+            </div>
+            <div style="padding:10px 12px;border-radius:14px;font-size:12.5px;line-height:1.5;background:{{ m.bg }};border:1px solid {{ m.border }};color:#E8EEF2;text-wrap:pretty">{{ m.text }}</div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ typingOn }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:8px;align-self:{{ typingAlign }};font-size:11px;color:#9BE3EC;padding:6px 10px;border-radius:12px;background:rgba(34,195,214,.07)">
+            <span style="display:flex;gap:3px"><span style="width:5px;height:5px;border-radius:50%;background:#22C3D6;animation:ci-dot 1s infinite"></span><span style="width:5px;height:5px;border-radius:50%;background:#22C3D6;animation:ci-dot 1s .15s infinite"></span><span style="width:5px;height:5px;border-radius:50%;background:#22C3D6;animation:ci-dot 1s .3s infinite"></span></span>
+            {{ typingLabel }}
+          </div>
+        </sc-if>
+      </div>
+      <span style="font-size:10.5px;color:#6E8797;line-height:1.4">Simulación demostrativa: las traducciones están pregrabadas y no se conectan a ningún servicio externo de IA.</span>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;voiceDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;showConnectors&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+const RATES = { USD: 4000, EUR: 4400, BRL: 750 };
+const LANGS = [
+  { c: 'en', name: 'English', short: 'EN', cur: 'USD', voice: 'en-US' },
+  { c: 'es', name: 'Español', short: 'ES', cur: 'COP', voice: 'es-CO' },
+  { c: 'fr', name: 'Français', short: 'FR', cur: 'EUR', voice: 'fr-FR' },
+  { c: 'pt', name: 'Português', short: 'PT', cur: 'BRL', voice: 'pt-BR' }
+];
+const PRODUCTS = [
+  { id: 'chicha', cop: 8000, icon: 'fa-solid fa-glass-water', tile: 'linear-gradient(145deg,rgba(217,180,106,.25),rgba(217,180,106,.06))' },
+  { id: 'manilla', cop: 15000, icon: 'fa-solid fa-hand-sparkles', tile: 'linear-gradient(145deg,rgba(227,106,90,.22),rgba(227,106,90,.05))' },
+  { id: 'relato', cop: 12000, icon: 'fa-regular fa-clock', tile: 'linear-gradient(145deg,rgba(34,195,214,.22),rgba(34,195,214,.05))' }
+];
+const T = {
+  es: {
+    brand: 'CREDENCIAL INTELIGENTE', welcomeTitle: 'Bienvenido a La Candelaria', welcomeMsg: 'Acerca tu teléfono a la credencial del vendedor', welcomeSub: 'Sin descargar ninguna aplicación', waiting: 'Buscando credencial cercana…', reading: 'Leyendo credencial…',
+    role: 'Maestro Chichero y Artesano', accredited: 'Vendedor acreditado – Chorro de Quevedo', ratings: 'calificaciones',
+    fairTitle: 'PRECIO JUSTO VERIFICADO', fairSub: 'Tarifas de referencia transparentes para turistas y visitantes.', fairNote: 'Verificación conceptual del proyecto',
+    offTitle: 'VENDEDOR FUERA DE TURNO', offSub: 'Las transacciones están temporalmente deshabilitadas por control de espacio público.',
+    menu: 'Menú digital', select: 'Seleccionar', unavailable: 'No disponible', origLbl: 'COP · precio original del vendedor', origShort: 'Original',
+    noteCOP: 'Todos los precios están fijados por el vendedor en pesos colombianos (COP).', noteConv: '',
+    modalTitle: 'Confirmar compra', productLbl: 'Producto', priceLbl: 'Precio original', refLbl: 'Referencia', methodLbl: 'Método', methodVal: 'Pago simulado', totalLbl: 'Total', simNote: 'Transacción ficticia: no se realiza ningún cobro real.', confirm: 'CONFIRMAR PAGO', cancel: 'Cancelar', blocked: 'Pago bloqueado: el vendedor está fuera de turno.',
+    processing: 'Procesando pago simulado…', successTitle: 'Transacción ficticia exitosa', successSub: 'Pago registrado con precio transparente.', receiptLbl: 'Comprobante', rateBtn: 'Calificar experiencia',
+    rateTitle: '¿Qué tal fue tu experiencia?', rateSub: 'Tu calificación ayuda a otros visitantes.', rateHints: ['Toca una estrella', 'Mala', 'Regular', 'Buena', 'Muy buena', 'Excelente'], send: 'Enviar calificación',
+    thanksTitle: '¡Gracias por tu visita!', thanksSub: 'Tu compra apoya el trabajo decente y el comercio justo en La Candelaria.', back: 'Volver al menú',
+    products: {
+      chicha: { name: 'Chicha Tradicional del Chorro', desc: 'Bebida artesanal tradicional de maíz.', pres: 'Vaso de 12 oz' },
+      manilla: { name: 'Manilla Tejida Muisca', desc: 'Artesanía elaborada a mano.', pres: 'Pieza individual' },
+      relato: { name: 'Relato Histórico Guiado', desc: 'Conoce las historias y leyendas del Chorro de Quevedo.', pres: 'Duración: 15 minutos' }
+    }
+  },
+  en: {
+    brand: 'SMART CREDENTIAL', welcomeTitle: 'Welcome to La Candelaria', welcomeMsg: "Hold your phone near the vendor's credential", welcomeSub: 'No app download required', waiting: 'Searching for a nearby credential…', reading: 'Reading credential…',
+    role: 'Master Chicha Maker and Artisan', accredited: 'Accredited vendor – Chorro de Quevedo', ratings: 'ratings',
+    fairTitle: 'FAIR PRICE VERIFIED', fairSub: 'Transparent reference rates for tourists and visitors.', fairNote: 'Conceptual verification by this project',
+    offTitle: 'VENDOR OFF SHIFT', offSub: 'Transactions are temporarily disabled due to public space control.',
+    menu: 'Digital menu', select: 'Select', unavailable: 'Unavailable', origLbl: '', origShort: 'Original',
+    noteCOP: '', noteConv: "The vendor's original price is always in Colombian pesos (COP). USD amounts are tourist references only, using a demo rate:",
+    modalTitle: 'Confirm purchase', productLbl: 'Product', priceLbl: 'Original price', refLbl: 'Reference in USD', methodLbl: 'Method', methodVal: 'Simulated payment', totalLbl: 'Total', simNote: 'Fictitious transaction: no real charge is made.', confirm: 'CONFIRM PAYMENT', cancel: 'Cancel', blocked: 'Payment blocked: the vendor is off shift.',
+    processing: 'Processing simulated payment…', successTitle: 'Fictitious transaction successful', successSub: 'Payment recorded at a transparent price.', receiptLbl: 'Receipt', rateBtn: 'Rate your experience',
+    rateTitle: 'How was your experience?', rateSub: 'Your rating helps other visitors.', rateHints: ['Tap a star', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'], send: 'Submit rating',
+    thanksTitle: 'Thank you for your visit!', thanksSub: 'Your purchase supports decent work and fair trade in La Candelaria.', back: 'Back to menu',
+    products: {
+      chicha: { name: 'Traditional Chorro Chicha', desc: 'Traditional handcrafted corn beverage.', pres: '12 oz cup' },
+      manilla: { name: 'Muisca Woven Bracelet', desc: 'Handmade craft piece.', pres: 'Single piece' },
+      relato: { name: 'Guided Historical Tale', desc: 'Discover the stories and legends of Chorro de Quevedo.', pres: 'Duration: 15 minutes' }
+    }
+  },
+  fr: {
+    brand: 'CRÉDENTIEL INTELLIGENT', welcomeTitle: 'Bienvenue à La Candelaria', welcomeMsg: 'Approchez votre téléphone du badge du vendeur', welcomeSub: 'Aucune application à télécharger', waiting: "Recherche d'un badge à proximité…", reading: 'Lecture du badge…',
+    role: 'Maître chichero et artisan', accredited: 'Vendeur accrédité – Chorro de Quevedo', ratings: 'avis',
+    fairTitle: 'PRIX JUSTE VÉRIFIÉ', fairSub: 'Tarifs de référence transparents pour les touristes et les visiteurs.', fairNote: 'Vérification conceptuelle du projet',
+    offTitle: 'VENDEUR HORS SERVICE', offSub: "Les transactions sont temporairement désactivées pour le contrôle de l'espace public.",
+    menu: 'Menu numérique', select: 'Choisir', unavailable: 'Indisponible', origLbl: '', origShort: 'Original',
+    noteCOP: '', noteConv: "Le prix d'origine du vendeur est toujours en pesos colombiens (COP). Les montants en EUR sont une simple référence pour les touristes, avec un taux de démonstration :",
+    modalTitle: "Confirmer l'achat", productLbl: 'Produit', priceLbl: "Prix d'origine", refLbl: 'Référence en EUR', methodLbl: 'Méthode', methodVal: 'Paiement simulé', totalLbl: 'Total', simNote: 'Transaction fictive : aucun paiement réel n’est effectué.', confirm: 'CONFIRMER LE PAIEMENT', cancel: 'Annuler', blocked: 'Paiement bloqué : le vendeur est hors service.',
+    processing: 'Traitement du paiement simulé…', successTitle: 'Transaction fictive réussie', successSub: 'Paiement enregistré à un prix transparent.', receiptLbl: 'Reçu', rateBtn: 'Évaluer l’expérience',
+    rateTitle: 'Comment s’est passée votre expérience ?', rateSub: 'Votre avis aide les autres visiteurs.', rateHints: ['Touchez une étoile', 'Mauvaise', 'Passable', 'Bonne', 'Très bonne', 'Excellente'], send: 'Envoyer l’avis',
+    thanksTitle: 'Merci de votre visite !', thanksSub: 'Votre achat soutient le travail décent et le commerce équitable à La Candelaria.', back: 'Retour au menu',
+    products: {
+      chicha: { name: 'Chicha traditionnelle du Chorro', desc: 'Boisson artisanale traditionnelle à base de maïs.', pres: 'Verre de 12 oz' },
+      manilla: { name: 'Bracelet tissé muisca', desc: 'Artisanat fait à la main.', pres: 'Pièce unique' },
+      relato: { name: 'Récit historique guidé', desc: 'Découvrez les histoires et légendes du Chorro de Quevedo.', pres: 'Durée : 15 minutes' }
+    }
+  },
+  pt: {
+    brand: 'CREDENCIAL INTELIGENTE', welcomeTitle: 'Bem-vindo à La Candelaria', welcomeMsg: 'Aproxime seu celular da credencial do vendedor', welcomeSub: 'Sem baixar nenhum aplicativo', waiting: 'Procurando credencial próxima…', reading: 'Lendo credencial…',
+    role: 'Mestre Chicheiro e Artesão', accredited: 'Vendedor credenciado – Chorro de Quevedo', ratings: 'avaliações',
+    fairTitle: 'PREÇO JUSTO VERIFICADO', fairSub: 'Tarifas de referência transparentes para turistas e visitantes.', fairNote: 'Verificação conceitual do projeto',
+    offTitle: 'VENDEDOR FORA DO TURNO', offSub: 'As transações estão temporariamente desativadas por controle do espaço público.',
+    menu: 'Cardápio digital', select: 'Selecionar', unavailable: 'Indisponível', origLbl: '', origShort: 'Original',
+    noteCOP: '', noteConv: 'O preço original do vendedor é sempre em pesos colombianos (COP). Os valores em BRL são apenas referência para turistas, com taxa de demonstração:',
+    modalTitle: 'Confirmar compra', productLbl: 'Produto', priceLbl: 'Preço original', refLbl: 'Referência em BRL', methodLbl: 'Método', methodVal: 'Pagamento simulado', totalLbl: 'Total', simNote: 'Transação fictícia: nenhuma cobrança real é feita.', confirm: 'CONFIRMAR PAGAMENTO', cancel: 'Cancelar', blocked: 'Pagamento bloqueado: o vendedor está fora do turno.',
+    processing: 'Processando pagamento simulado…', successTitle: 'Transação fictícia concluída', successSub: 'Pagamento registrado com preço transparente.', receiptLbl: 'Comprovante', rateBtn: 'Avaliar experiência',
+    rateTitle: 'Como foi sua experiência?', rateSub: 'Sua avaliação ajuda outros visitantes.', rateHints: ['Toque em uma estrela', 'Ruim', 'Regular', 'Boa', 'Muito boa', 'Excelente'], send: 'Enviar avaliação',
+    thanksTitle: 'Obrigado pela visita!', thanksSub: 'Sua compra apoia o trabalho decente e o comércio justo em La Candelaria.', back: 'Voltar ao cardápio',
+    products: {
+      chicha: { name: 'Chicha Tradicional do Chorro', desc: 'Bebida artesanal tradicional de milho.', pres: 'Copo de 12 oz' },
+      manilla: { name: 'Pulseira Tecida Muisca', desc: 'Artesanato feito à mão.', pres: 'Peça individual' },
+      relato: { name: 'Relato Histórico Guiado', desc: 'Conheça as histórias e lendas do Chorro de Quevedo.', pres: 'Duração: 15 minutos' }
+    }
+  }
+};
+const SCEN = [
+  { id: 'chicha', title: 'Ingredientes de la chicha', icon: 'fa-solid fa-wheat-awn' },
+  { id: 'precio', title: 'Precio de las artesanías', icon: 'fa-solid fa-tags' },
+  { id: 'historia', title: 'Historia del Chorro', icon: 'fa-solid fa-landmark' }
+];
+const CONV = {
+  chicha: {
+    q: { en: 'Hi! What is this drink made of, and how do you prepare it?', fr: 'Bonjour ! De quoi est faite cette boisson et comment la préparez-vous ?', pt: 'Olá! Do que é feita essa bebida e como vocês a preparam?' },
+    qEs: '¡Hola! ¿De qué está hecha esta bebida y cómo la preparan?',
+    aEs: '¡Con mucho gusto, sumercé! La chicha se hace principalmente con maíz. Lo molemos, lo cocinamos y lo dejamos fermentar unos días en ollas de barro, como lo hacían nuestros abuelos.',
+    a: { en: 'With pleasure! Chicha is made mainly from corn. We grind it, cook it and let it ferment for a few days in clay pots, just like our grandparents did.', fr: 'Avec plaisir ! La chicha est faite principalement de maïs. On le moud, on le cuit et on le laisse fermenter quelques jours dans des pots en terre cuite, comme le faisaient nos grands-parents.', pt: 'Com muito prazer! A chicha é feita principalmente de milho. Nós o moemos, cozinhamos e deixamos fermentar alguns dias em potes de barro, como faziam nossos avós.' }
+  },
+  precio: {
+    q: { en: 'How much is one bracelet? Is the price fixed, or is there a discount if I buy two?', fr: 'Combien coûte un bracelet ? Le prix est-il fixe, ou y a-t-il une réduction si j’en achète deux ?', pt: 'Quanto custa uma pulseira? O preço é fixo ou tem desconto se eu comprar duas?' },
+    qEs: '¿Cuánto cuesta una manilla? ¿El precio es fijo o hay descuento si compro dos?',
+    aEs: 'Cada manilla vale 15.000 pesos, el mismo precio que ve en el menú, igual para todos. Si se lleva dos, se las dejo en 28.000 y le regalo una pulserita de hilo.',
+    a: { en: 'Each bracelet is 15,000 pesos, the same price you see on the menu, the same for everyone. If you take two, I’ll let you have them for 28,000 and add a small thread bracelet as a gift.', fr: 'Chaque bracelet coûte 15 000 pesos, le même prix que sur le menu, pareil pour tout le monde. Si vous en prenez deux, je vous les laisse à 28 000 et je vous offre un petit bracelet en fil.', pt: 'Cada pulseira custa 15.000 pesos, o mesmo preço do cardápio, igual para todos. Se levar duas, deixo por 28.000 e dou de presente uma pulseirinha de linha.' }
+  },
+  historia: {
+    q: { en: "What's the story of this little square? And what else can I visit nearby?", fr: 'Quelle est l’histoire de cette petite place ? Et que puis-je visiter aux alentours ?', pt: 'Qual é a história desta pracinha? E o que mais posso visitar por perto?' },
+    qEs: '¿Cuál es la historia de esta plazoleta? ¿Y qué más puedo visitar cerca?',
+    aEs: 'Según la tradición, aquí se fundó Bogotá en 1538. Había una fuente de agua donde la gente venía a llenar sus vasijas. Muy cerca están el Museo del Oro, el Museo Botero y la Plaza de Bolívar; todo se puede recorrer a pie.',
+    a: { en: 'According to tradition, Bogotá was founded right here in 1538. There was a water spring where people came to fill their jugs. The Gold Museum, the Botero Museum and Plaza de Bolívar are very close; you can walk to all of them.', fr: 'Selon la tradition, Bogotá a été fondée ici même en 1538. Il y avait une fontaine où les gens venaient remplir leurs jarres. Le Musée de l’Or, le Musée Botero et la Plaza de Bolívar sont tout près ; on peut tout visiter à pied.', pt: 'Segundo a tradição, Bogotá foi fundada aqui mesmo em 1538. Havia uma fonte de água onde as pessoas vinham encher seus jarros. O Museu do Ouro, o Museu Botero e a Praça de Bolívar ficam bem perto; dá para ir a pé a todos.' }
+  }
+};
+const LANG_ES_NAME = { en: 'INGLÉS', fr: 'FRANCÉS', pt: 'PORTUGUÉS', es: 'ESPAÑOL' };
+
+function fmtCOP(v) { return '$' + v.toLocaleString('es-CO') + ' COP'; }
+function fmtConv(cop, cur) {
+  const n = cop / RATES[cur];
+  if (cur === 'USD') return 'US$ ' + n.toFixed(2);
+  if (cur === 'EUR') return n.toFixed(2).replace('.', ',') + ' €';
+  return 'R$ ' + n.toFixed(2).replace('.', ',');
+}
+function nowStr() { const d = new Date(); return d.toTimeString().slice(0, 8); }
+function buildQR() {
+  const N = 21, g = [];
+  let s = 8;
+  const rnd = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  for (let y = 0; y < N; y++) { g[y] = []; for (let x = 0; x < N; x++) g[y][x] = rnd() > 0.52; }
+  const finder = (ox, oy) => { for (let y = -1; y < 8; y++) for (let x = -1; x < 8; x++) { const X = ox + x, Y = oy + y; if (X < 0 || Y < 0 || X >= N || Y >= N) continue; const edge = x === 0 || x === 6 || y === 0 || y === 6; const core = x >= 2 && x <= 4 && y >= 2 && y <= 4; g[Y][X] = x >= 0 && x <= 6 && y >= 0 && y <= 6 && (edge || core); } };
+  finder(0, 0); finder(14, 0); finder(0, 14);
+  let d = '';
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (g[y][x]) d += 'M' + x + ' ' + y + 'h1v1h-1z';
+  return d;
+}
+const QR = buildQR();
+const EQ = Array.from({ length: 22 }, (_, i) => ({ dur: (0.55 + ((i * 37) % 7) * 0.09).toFixed(2) + 's', delay: (-((i * 53) % 10) * 0.08).toFixed(2) + 's' }));
+
+class Component extends DCLogic {
+  initial() {
+    return {
+      unlocked: false, reading: false, nfcBurst: false, toastOn: false, haptic: false, nfcReads: 0,
+      shiftOn: true, lang: 'es', sales: 24, salesFlash: false, ratingSum: 4.8 * 126, ratingCount: 126,
+      modal: null, step: null, stars: 0, txId: '',
+      scenario: null, shown: 0, typing: -1, running: false,
+      voiceOn: !!this.props.voiceDefault && this.hasSpeech(),
+      log: [{ t: nowStr(), m: 'Sistema listo · modo demostración offline', k: 'info' }]
+    };
+  }
+  state = this.initial();
+  timers = [];
+  tok = 0;
+  chatRef = React.createRef();
+
+  hasSpeech() { return typeof window !== 'undefined' && 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined'; }
+  later(fn, ms) { const id = setTimeout(fn, ms); this.timers.push(id); return id; }
+  wait(ms) { return new Promise(r => this.later(r, ms)); }
+  componentDidMount() { if (this.hasSpeech()) { try { window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices(); } catch (e) {} } }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); this.tok++; if (this.hasSpeech()) window.speechSynthesis.cancel(); }
+  componentDidUpdate(pp, ps) { if (ps.shown !== this.state.shown || ps.typing !== this.state.typing) { const el = this.chatRef.current; if (el) el.scrollTop = el.scrollHeight; } }
+
+  addLog(m, k) { this.setState(s => ({ log: [{ t: nowStr(), m, k: k || 'info' }, ...s.log].slice(0, 6) })); }
+  pulseHaptic() { this.setState({ haptic: false }); this.later(() => this.setState({ haptic: true }), 30); this.later(() => this.setState({ haptic: false }), 800); }
+
+  tapNFC = () => {
+    if (this.state.reading) return;
+    this.setState({ reading: true, nfcBurst: true, toastOn: false });
+    this.addLog('Toque NFC detectado · leyendo credencial #008', 'nfc');
+    this.later(() => this.setState({ nfcBurst: false }), 1400);
+    this.later(() => {
+      this.setState(s => ({ reading: false, unlocked: true, toastOn: true, nfcReads: s.nfcReads + 1 }));
+      this.pulseHaptic();
+      this.addLog('Credencial leída · menú cargado desde caché (0 MB)', 'ok');
+    }, 900);
+    this.later(() => this.setState({ toastOn: false }), 5200);
+  };
+  toggleShift = () => {
+    const on = !this.state.shiftOn;
+    this.setState({ shiftOn: on });
+    this.addLog(on ? 'Turno activo · compras habilitadas' : 'Fuera de turno · compras deshabilitadas', on ? 'ok' : 'warn');
+    if (on && this.state.unlocked) this.pulseHaptic();
+  };
+  setLang = (c) => {
+    if (c === this.state.lang) return;
+    this.setState({ lang: c });
+    const L = LANGS.find(l => l.c === c);
+    this.addLog('Idioma del turista: ' + L.name + ' · ' + L.cur, 'lang');
+    if (this.state.unlocked && this.state.shiftOn) this.pulseHaptic();
+    if (this.state.running && this.state.scenario) this.play(this.state.scenario);
+  };
+  selectProduct = (id) => { if (!this.state.shiftOn) return; this.setState({ modal: id, step: 'confirm', stars: 0 }); };
+  closeModal = () => this.setState({ modal: null, step: null, stars: 0 });
+  confirmPay = () => {
+    if (!this.state.shiftOn) return;
+    this.setState({ step: 'processing' });
+    this.later(() => {
+      if (!this.state.modal) return;
+      const n = this.state.sales + 1;
+      this.setState({ step: 'success', sales: n, salesFlash: true, txId: 'TX-008-' + String(n).padStart(4, '0') });
+      const p = T.es.products[this.state.modal];
+      this.addLog('Venta transparente #' + n + ' · ' + p.name, 'ok');
+      this.later(() => this.setState({ salesFlash: false }), 1700);
+    }, 1300);
+  };
+  sendRating = () => {
+    const st = this.state.stars; if (!st) return;
+    this.setState(s => ({ step: 'thanks', ratingSum: s.ratingSum + st, ratingCount: s.ratingCount + 1 }));
+    this.addLog('Calificación recibida · ' + st + ' de 5 estrellas', 'gold');
+  };
+  toggleVoice = () => {
+    if (!this.hasSpeech()) return;
+    const on = !this.state.voiceOn;
+    if (!on) window.speechSynthesis.cancel();
+    this.setState({ voiceOn: on });
+  };
+
+  tl() { return this.state.lang === 'es' ? 'en' : this.state.lang; }
+  msgs(scen) {
+    const c = CONV[scen || this.state.scenario]; if (!c) return [];
+    const tl = this.tl(); const v = LANGS.find(l => l.c === tl).voice;
+    return [
+      { who: 'tourist', text: c.q[tl], voice: v, code: tl.toUpperCase() },
+      { who: 'ai', text: c.qEs, voice: 'es-CO', code: 'ES' },
+      { who: 'carlos', text: c.aEs, voice: 'es-CO', code: 'ES' },
+      { who: 'listen', text: c.a[tl], voice: v, code: tl.toUpperCase() }
+    ];
+  }
+  speak(text, lang) {
+    return new Promise(res => {
+      if (!this.hasSpeech() || !this.state.voiceOn) return res();
+      try {
+        const ss = window.speechSynthesis;
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = lang; u.rate = 1;
+        const vs = ss.getVoices() || [];
+        const norm = x => (x || '').replace('_', '-').toLowerCase();
+        const v = vs.find(x => norm(x.lang) === norm(lang)) || vs.find(x => norm(x.lang).startsWith(lang.slice(0, 2)));
+        if (v) u.voice = v;
+        let done = false; const fin = () => { if (!done) { done = true; res(); } };
+        u.onend = fin; u.onerror = fin;
+        this.later(fin, 2500 + text.length * 85);
+        ss.speak(u);
+      } catch (e) { res(); }
+    });
+  }
+  async play(id) {
+    const tok = ++this.tok;
+    if (this.hasSpeech()) window.speechSynthesis.cancel();
+    this.setState({ scenario: id, shown: 0, typing: 0, running: true });
+    const sc = SCEN.find(s => s.id === id);
+    this.addLog('Traducción IA (demo) · ' + sc.title, 'lang');
+    for (let i = 0; i < 4; i++) {
+      this.setState({ typing: i });
+      await this.wait(i % 2 ? 700 : 950);
+      if (tok !== this.tok) return;
+      this.setState({ shown: i + 1, typing: -1 });
+      const m = this.msgs(id)[i];
+      await Promise.all([this.speak(m.text, m.voice), this.wait(this.state.voiceOn ? 300 : 1300)]);
+      if (tok !== this.tok) return;
+    }
+    this.setState({ running: false });
+  }
+  reset = () => {
+    this.timers.forEach(clearTimeout); this.timers = []; this.tok++;
+    if (this.hasSpeech()) window.speechSynthesis.cancel();
+    const s = this.initial(); s.log = [{ t: nowStr(), m: 'Demostración reiniciada · estado inicial', k: 'info' }];
+    this.setState(s);
+  };
+
+  renderVals() {
+    const s = this.state, t = T[s.lang], L = LANGS.find(l => l.c === s.lang), cur = L.cur, isEs = s.lang === 'es';
+    const shiftOn = s.shiftOn;
+    const tl = this.tl();
+    const logColor = { info: '#8FA6B5', nfc: '#9BE3EC', ok: '#A9EBD2', warn: '#FFB3BB', lang: '#9BE3EC', gold: '#E3C88E' };
+    const prodView = PRODUCTS.map((p, i) => {
+      const tr = t.products[p.id];
+      return {
+        name: tr.name, desc: tr.desc, pres: tr.pres, presIcon: p.icon, tileBg: p.tile,
+        isChicha: p.id === 'chicha', isManilla: p.id === 'manilla', isRelato: p.id === 'relato',
+        primary: isEs ? '$' + p.cop.toLocaleString('es-CO') : fmtConv(p.cop, cur),
+        secondary: isEs ? t.origLbl : t.origShort + ': ' + fmtCOP(p.cop),
+        delay: (i * 0.08) + 's', opacity: shiftOn ? 1 : 0.55,
+        disabled: !shiftOn, cursor: shiftOn ? 'pointer' : 'not-allowed',
+        btnBg: shiftOn ? '#22C3D6' : 'rgba(255,255,255,.08)', btnColor: shiftOn ? '#0B1E2B' : '#7F97A6',
+        btnLabel: shiftOn ? t.select : t.unavailable,
+        onSelect: () => this.selectProduct(p.id)
+      };
+    });
+    const mp = s.modal ? PRODUCTS.find(p => p.id === s.modal) : null;
+    const modalProd = mp ? { name: t.products[mp.id].name, cop: fmtCOP(mp.cop), conv: isEs ? '' : fmtConv(mp.cop, cur), primary: isEs ? fmtCOP(mp.cop) : fmtConv(mp.cop, cur) } : { name: '', cop: '', conv: '', primary: '' };
+    const rateStr = isEs ? '' : ' 1 ' + cur + ' = ' + RATES[cur].toLocaleString('es-CO') + ' COP.';
+    const labels = {
+      tourist: { label: 'TURISTA HABLA', icon: 'fa-solid fa-user', color: '#B9C8D2', bg: 'rgba(255,255,255,.05)', border: 'rgba(255,255,255,.09)', align: 'flex-start', justify: 'flex-start' },
+      ai: { label: 'AURICULAR IA · TRADUCCIÓN AL ESPAÑOL', icon: 'fa-solid fa-language', color: '#22C3D6', bg: 'rgba(34,195,214,.1)', border: 'rgba(34,195,214,.35)', align: 'flex-end', justify: 'flex-end' },
+      carlos: { label: 'DON CARLOS RESPONDE', icon: 'fa-solid fa-store', color: '#E3C88E', bg: 'rgba(217,180,106,.12)', border: 'rgba(217,180,106,.35)', align: 'flex-end', justify: 'flex-end' },
+      listen: { label: 'TURISTA ESCUCHA', icon: 'fa-solid fa-headphones', color: '#22C3D6', bg: 'rgba(34,195,214,.1)', border: 'rgba(34,195,214,.35)', align: 'flex-start', justify: 'flex-start' }
+    };
+    const all = this.msgs();
+    const chatMsgs = all.slice(0, s.shown).map(m => { const l = labels[m.who]; return { text: m.text, code: m.code, label: l.label, icon: l.icon, labelColor: l.color, bg: l.bg, border: l.border, align: l.align, justify: l.justify, isTrans: m.who === 'ai' || m.who === 'listen' }; });
+    const typingLabels = ['Turista hablando en ' + LANG_ES_NAME[tl].toLowerCase() + '…', 'Traduciendo al español · 120 ms', 'Don Carlos respondiendo…', 'Traduciendo al ' + LANG_ES_NAME[tl].toLowerCase() + ' · 120 ms'];
+    const noSpeech = !this.hasSpeech();
+    return {
+      t, sales: s.sales, salesFlash: s.salesFlash, langName: L.name, curCode: isEs ? 'COP' : cur + ' · ref. COP',
+      ratingAvg: (s.ratingSum / s.ratingCount).toFixed(1), ratingCount: s.ratingCount,
+      nfcStatus: s.reading ? 'Leyendo…' : s.unlocked ? 'Conectado · #008' : 'En espera',
+      nfcStatusColor: s.reading ? '#22C3D6' : s.unlocked ? '#2BD49A' : '#8FA6B5',
+      nfcTileBorder: s.reading || s.toastOn ? 'rgba(34,195,214,.6)' : 'rgba(34,195,214,.12)',
+      logView: s.log.slice(0, 2).map(e => ({ t: e.t, m: e.m, color: logColor[e.k] })),
+      reset: this.reset, tapNFC: this.tapNFC, toggleShift: this.toggleShift,
+      qrPath: QR, toastOn: s.toastOn, nfcBurst: s.nfcBurst,
+      nfcBtnLabel: s.reading ? 'LEYENDO CREDENCIAL…' : 'SIMULAR TOQUE NFC',
+      badgeAnim: s.reading ? 'ci-glow 1.2s ease' : 'none',
+      badgeFilter: shiftOn ? 'none' : 'saturate(.55) brightness(.92)',
+      shiftOn, shiftOff: !shiftOn,
+      shiftColor: shiftOn ? '#2BD49A' : '#FF5A6A', shiftText: shiftOn ? '#BFF5DF' : '#FFC2C8',
+      shiftBorder: shiftOn ? 'rgba(43,212,154,.35)' : 'rgba(255,90,106,.5)',
+      shiftLabel: shiftOn ? 'TURNO ACTIVO' : 'FUERA DE TURNO',
+      switchBg: shiftOn ? '#2BD49A' : '#FF5A6A', knobX: shiftOn ? '24px' : '0px',
+      showConnectors: this.props.showConnectors ?? true,
+      connLeftColor: s.reading || s.unlocked ? '#22C3D6' : 'rgba(143,166,181,.35)',
+      connRightColor: s.running ? '#22C3D6' : s.scenario ? 'rgba(34,195,214,.55)' : 'rgba(143,166,181,.35)',
+      locked: !s.unlocked, unlocked: s.unlocked,
+      lockedHint: s.reading ? t.reading : t.waiting,
+      langBtns: LANGS.map(l => ({ short: l.short, name: l.name, onClick: () => this.setLang(l.c), bg: l.c === s.lang ? '#22C3D6' : 'transparent', color: l.c === s.lang ? '#0B1E2B' : '#B9C8D2' })),
+      hapticAnim: s.haptic ? 'ci-shake .55s ease' : 'none',
+      prodView, rateNote: isEs ? t.noteCOP : t.noteConv + rateStr,
+      modalOpen: !!s.modal, modalProd, showConv: !isEs, closeModal: this.closeModal, confirmPay: this.confirmPay,
+      stepConfirm: s.step === 'confirm', stepProcessing: s.step === 'processing', stepSuccess: s.step === 'success', stepRate: s.step === 'rate', stepThanks: s.step === 'thanks',
+      payBg: shiftOn ? 'linear-gradient(135deg,#2BD49A,#1FB884)' : 'rgba(255,255,255,.08)', payColor: shiftOn ? '#05281B' : '#7F97A6', payCursor: shiftOn ? 'pointer' : 'not-allowed', payShadow: shiftOn ? '0 10px 30px rgba(43,212,154,.3)' : 'none',
+      txId: s.txId, goRate: () => this.setState({ step: 'rate' }),
+      starList: [1, 2, 3, 4, 5].map(n => ({ onClick: () => this.setState({ stars: n }), cls: n <= s.stars ? 'fa-solid fa-star' : 'fa-regular fa-star', color: n <= s.stars ? '#E3C88E' : '#5E7888', scale: n <= s.stars ? 1.08 : 1, title: t.rateHints[n] })),
+      rateHint: t.rateHints[s.stars], cantSend: !s.stars, sendRating: this.sendRating,
+      sendBg: s.stars ? '#22C3D6' : 'rgba(255,255,255,.08)', sendColor: s.stars ? '#0B1E2B' : '#7F97A6',
+      noSpeech, toggleVoice: this.toggleVoice,
+      voiceIcon: noSpeech ? 'fa-solid fa-volume-xmark' : s.voiceOn ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark',
+      voiceLabel: noSpeech ? 'Voz no disponible' : s.voiceOn ? 'Voz activada' : 'Voz desactivada',
+      voiceBorder: s.voiceOn ? 'rgba(34,195,214,.6)' : 'rgba(232,238,242,.18)', voiceBg: s.voiceOn ? 'rgba(34,195,214,.14)' : 'transparent', voiceColor: s.voiceOn ? '#9BE3EC' : '#B9C8D2',
+      running: s.running, ledColor: s.running ? '#22C3D6' : '#2BD49A',
+      pairLabel: tl.toUpperCase() + ' ⇄ ES',
+      transStatus: s.running ? 'Traducción activa' : s.scenario ? 'Conversación completada' : 'En espera',
+      transColor: s.running ? '#22C3D6' : '#8FA6B5',
+      eqBars: EQ, eqState: s.running ? 'running' : 'paused',
+      scenBtns: SCEN.map((sc, i) => { const a = s.scenario === sc.id; return { title: sc.title, icon: sc.icon, num: '0' + (i + 1), onClick: () => this.play(sc.id), border: a ? 'rgba(34,195,214,.7)' : 'rgba(255,255,255,.08)', bg: a ? 'rgba(34,195,214,.12)' : 'rgba(255,255,255,.03)', iconColor: a ? '#22C3D6' : '#8FA6B5' }; }),
+      chatRef: this.chatRef, chatEmpty: !s.scenario, chatMsgs,
+      typingOn: s.typing >= 0 && s.running, typingLabel: typingLabels[Math.max(0, s.typing)] || '',
+      typingAlign: s.typing === 1 || s.typing === 2 ? 'flex-end' : 'flex-start'
+    };
+  }
+}
+</script>
+</body>
+</html>
